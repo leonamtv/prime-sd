@@ -5,13 +5,9 @@ import json
 import subprocess
 from datetime import datetime
 
-tentativas = 2
-tempos = [ 1, 2 ]
-threads = [ 2 ]
-
-# tentativas = 10
-# tempos = [ 2, 5, 10, 20, 30, 40, 50, 60 ]
-# threads = [ 2, 4, 8 ]
+tentativas = 10
+tempos = [ 1, 2, 5, 10, 20, 30, 40, 50, 60, 80 ]
+threads = [ 2, 4, 8 ]
 
 now = datetime.now()
 
