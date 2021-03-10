@@ -1,3 +1,4 @@
 .vscode
 output_*
 *.out
+*.json
