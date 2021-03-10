@@ -5,7 +5,7 @@ unsigned long long int control = 0;
 int tempo_exec_sec = 40;
 
 void verifica_primo ();
-int main ();
+int main (int argc, char* argv[]);
 
 void verifica_primo ( ) {
     control ++;
