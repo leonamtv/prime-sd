@@ -3,3 +3,6 @@ output_*
 *.out
 *.json
 *.tar.gz
+.ipynb_checkpoints
+*.csv
+*.ipynb
