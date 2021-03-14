@@ -3,13 +3,34 @@
 import os
 import json
 import subprocess
-from datetime import datetime
+from datetime import datetime, timedelta
 
 tentativas = 10
-tempos = [ 1, 2, 5, 10, 20, 30, 40, 50, 60, 80 ]
+tempos = [ 1, 2, 5, 10, 20, 30, 40, 50, 60, 80, 100, 120, 140 ]
 threads = [ 2, 4, 8 ]
 
+print('Calculando tempo total...')
+
+tempo_total = 0
+tempo_paral = 0
+tempo_seq = 0
+
+for tempo in tempos : 
+    tempo_paral += tempo
+    tempo_seq += tempo
+
+tempo_paral *= len ( threads )
+tempo_total = tempo_paral + tempo_seq
+tempo_total *= tentativas
+
+print(f'Tempo total: {tempo_total}s')
+
 now = datetime.now()
+
+delta = timedelta(seconds=tempo_total)
+termino = now + delta
+
+print(f'Irá acabar aproximadamente em {termino.day}/{termino.month}/{termino.year} às {termino.hour}:{termino.minute}:{termino.second}')
 
 output_path = f"./output/exec_{now.day}_{now.month}_{now.year}_{now.hour}_{now.minute}"
 
@@ -28,16 +49,10 @@ for i in range ( tentativas ) :
         file_dump = ''
         for entry in response :
             file_dump += entry
-        if not os.path.isdir ( output_path ) :
-            os.makedirs ( output_path )
-        file_name = os.path.join ( output_path, f"output_{str(tempo)}s_{str(i+1)}_seq_cpp.txt" )
-        output_file = open( file_name, 'w')
-        output_file.write(file_dump)
-        output_file.close()
         data['sequential'].append({
             "tentativa" : ( i + 1 ),
             "tempo" : tempo,
-            "file"  : file_name
+            "num_primes"  : int(file_dump)
         })
 
 for i in range ( tentativas ) :
@@ -50,23 +65,20 @@ for i in range ( tentativas ) :
             response = [ entry.decode('utf-8') for entry in response ]
             file_dump = ''
             for entry in response :
-                file_dump += entry
-            if not os.path.isdir ( output_path ) :
-                os.makedirs ( output_path )
-            file_name = os.path.join ( output_path, f"output_{str(tempo)}s_{str(thread)}th_{str(i+1)}_par_cpp.txt" )
-            output_file = open( file_name, 'w')
-            output_file.write(file_dump)
-            output_file.close()
+                file_dump += entry.rstrip('\n')
             data['parallel'].append({
                 "tentativa" : ( i + 1 ),
                 "tempo"   : tempo,
                 "threads" : thread,
-                "file"    : file_name
+                "num_primes"  : int(file_dump)
             })
+
+if not os.path.isdir ( output_path ) :
+    os.makedirs ( output_path )
 
 with open(os.path.join( output_path, "index.json" ), 'w') as fp :
     json.dump ( data, fp )  
     print('Escrita de arquivo de index concluída.')
 
-
-print('Colheita de dados concluída.')
+now = datetime.now()
+print(f'Colheita de dados concluída em {now.day}/{now.month}/{now.year} às {now.hour}:{now.minute}:{now.second}')

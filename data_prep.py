@@ -3,7 +3,11 @@
 import os
 import json
 
-path_to_index_file = './output/exec_10_3_2021_18_24/index.json'
+output_path = './output'
+
+latest = max([ os.path.join( output_path, d ) for d in os.listdir('./output') if os.path.isdir ( os.path.join( output_path, d ))], key=os.path.getmtime )
+
+path_to_index_file = os.path.join ( latest, 'index.json')
 tempo_total_sec = 0
 
 data = {}
@@ -12,13 +16,13 @@ data = {}
 with open ( path_to_index_file, 'r' ) as json_file :
     data = json.load ( json_file )
 
-csv_dump = 'index,tipo,tentativa,tempo,threads,num_lines\n'
+csv_dump = 'index,tipo,tentativa,tempo,threads,num_primes\n'
 csv_index = 0
 
 for entry in data :
     for item in data[entry] :
         tempo_total_sec += item['tempo']
-        csv_dump += f"{str(csv_index)},\"{entry}\",{str(item['tentativa'])},{str(item['tempo'])},{ 0 if entry == 'sequential' else item['threads'] },{str ( sum ( 1 for line in open ( item['file'], 'r' )))}\n"
+        csv_dump += f"{str(csv_index)},\"{entry}\",{str(item['tentativa'])},{str(item['tempo'])},{ 0 if entry == 'sequential' else item['threads'] },{str ( item ['num_primes'] )}\n"
         csv_index += 1
 
 csv_file = open ( 'data/organized_data.csv', 'w' )
