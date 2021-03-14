@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <cmath>
 
 unsigned long long int control = 0;
 unsigned long long number_of_primes = 0;
@@ -10,7 +11,7 @@ int main (int argc, char* argv[]);
 
 void verifica_primo ( ) {
     control ++;
-    int aux = control, div = aux - 1, divisors = 0;
+    int aux = control, div = (int) sqrt( aux ), divisors = 0;
     while ( div > 1 ) {
         if ( aux % div == 0 && div > 1 ) 
             ++divisors;
