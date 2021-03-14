@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[65]:
+# In[1]:
 
 
 import pandas as pd
@@ -14,13 +14,13 @@ import matplotlib.pyplot as plt
 path_to_csv = '../data/organized_data.csv'
 
 
-# In[33]:
+# In[3]:
 
 
 df = pd.read_csv ( path_to_csv, sep=',' )
 
 
-# In[60]:
+# In[4]:
 
 
 dfs = df.loc[df['tipo'] == 'sequential']
@@ -38,7 +38,7 @@ dfp4 = dfp4.drop(columns=[ 'index', 'threads', 'tentativa' ])
 dfp8 = dfp8.drop(columns=[ 'index', 'threads', 'tentativa' ])
 
 
-# In[61]:
+# In[5]:
 
 
 dfs = dfs.sort_values('tempo')
@@ -54,17 +54,70 @@ dfp8 = dfp8.sort_values('tempo')
 dfp8 = dfp8.groupby('tempo').mean().reset_index()
 
 
-# In[66]:
+# In[11]:
 
 
 fig = plt.figure(figsize=(20,15))
 frames = [ dfs, dfp2, dfp4, dfp8 ]
 for frame in frames :
-    plt.plot ( frame['tempo'], frame['num_lines'] )
+    plt.plot ( frame['tempo'], frame['num_primes'] )
 plt.grid()
 plt.title('Número de primos gerados por tempo')
 plt.xlabel('Tempo (s)')
 plt.ylabel('Número médio de primos gerados')
 plt.legend([ 'sequencial', '2-threads', '4-threads', '8-threads' ])
+# plt.savefig('resultado.pdf', dpi=150)
 plt.show()
+
+
+# In[67]:
+
+
+def is_prime_n ( n ) :
+    if n < 2 :
+        return False
+    aux = n - 1
+    while aux > 2 :
+        if n % aux == 0 :
+            return False
+        aux -= 1
+    return True    
+
+
+# In[68]:
+
+
+from math import sqrt
+
+
+# In[73]:
+
+
+def is_prime_sqrt ( n ) :
+    if n < 2 :
+        return False
+    aux = int(sqrt(n))
+    while aux > 2 :
+        if n % aux == 0 :
+            return False
+        aux -= 1
+    return True    
+
+
+# In[81]:
+
+
+get_ipython().run_line_magic('timeit', '-r 10 is_prime_n(99_999_999)')
+
+
+# In[82]:
+
+
+get_ipython().run_line_magic('timeit', '-r 10 is_prime_sqrt(99_999_999)')
+
+
+# In[ ]:
+
+
+
 
