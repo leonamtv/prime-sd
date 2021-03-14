@@ -6,14 +6,16 @@ A geração concorrente acontece da seguinte forma:
 
 1. Uma variável inteira armazena um número inicial.
 2. Cada thread incrementa esse valor e verifica se o valor incrementado é primo (utilizando **mutex** para travar as partes críticas). Cada uma das threads executam um loop infinito.
-3. Se o número for primo, ele é impresso no **stdout**.
+3. Se o número for primo, uma variável de contagem de números primos é incrementada, também utilizando um **mutex** para garantir a consistência. Um segundo objeto **mutex** é utilizado para que não haja travamentos desnecessários nas outras threads que estejam utilizando um **lock** com o primeiro **mutex**. Nossos experimentos mostraram que dois **mutexes** permitem gerar mais primos do que apenas um.
 4. Esse processo é executado por **N** segundos.
+5. No final, a variável de contagem de primos é impressa no **stdout**.
 
 A geração concorrente acontece da seguinte forma:
 
 1. Uma variável inteira armazena um número inicial.
 2. Enquanto **N** segundos não se passarem, incrementamos o valor e verificamos se este é primo.
-3. Se for primo, ele é impresso no **stdout**.
+3. Se o número for primo, uma variável de contagem de números primos é incrementada.
+4. No final, a variável de contagem de primos é impressa no **stdout**.
 
 ## Estratégia de análise de desempenho
 
