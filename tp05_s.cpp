@@ -2,6 +2,7 @@
 #include <chrono>
 
 unsigned long long int control = 0;
+unsigned long long number_of_primes = 0;
 int tempo_exec_sec = 40;
 
 void verifica_primo ();
@@ -16,7 +17,7 @@ void verifica_primo ( ) {
         div--;
     }
     if ( divisors == 0 )
-        std::cout << aux << std::endl;
+        number_of_primes ++;
 }
 
 int main (int argc, char* argv[] ) {
@@ -35,7 +36,9 @@ int main (int argc, char* argv[] ) {
         verifica_primo();
         end = std::chrono::steady_clock::now();
     }
-    if ( std::chrono::duration_cast<std::chrono::seconds>(end - begin) >= std::chrono::seconds{tempo_exec_sec} )
+    if ( std::chrono::duration_cast<std::chrono::seconds>(end - begin) >= std::chrono::seconds{tempo_exec_sec} ) {
+        std::cout << number_of_primes << std::endl;
         return 0;
+    }
     return 0;
 }
