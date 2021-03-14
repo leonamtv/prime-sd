@@ -17,9 +17,15 @@ A geração concorrente acontece da seguinte forma:
 
 ## Estratégia de análise de desempenho
 
-* Gerar números primos sequencialmente por 5, 10, 20, 30, 40, 50 e 60 segundos, testando múltiplas vezes cada um dos tempos para que possamos tirar a média dos valores obtidos e diminuir a incerteza.
-* Gerar números primos concorrentemente por 5, 10, 20, 30, 40, 50 e 60 segundos com 2, 4 e 8 threads, testando múltiplas vezes cada um dos tempos para que possamos tirar a média dos valores obtidos e diminuir a incerteza.
+* Gerar números primos sequencialmente por 5, 10, 20, 30, 40, 50, 60, 80, 100, 120 e 140 segundos, testando 10 vezes cada um dos tempos para que possamos tirar a média dos valores obtidos e diminuir a incerteza.
+* Gerar números primos concorrentemente por 5, 10, 20, 30, 40, 50, 60, 80, 100, 120 e 140 segundos com 2, 4 e 8 threads, testando 10 vezes cada um dos tempos para que possamos tirar a média dos valores obtidos e diminuir a incerteza.
 * Plotar tudo em um gráfico e analisar.
+
+## Resultados
+
+<p align='center'>
+    <img src='fig/resultado_14_03_2021.png'>
+</p>
 
 ## Autores
 
