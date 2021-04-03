@@ -5,6 +5,8 @@
 
 unsigned long long int control = 2;
 unsigned long long number_of_primes = 0;
+int primes[50000000];
+
 int num_threads = 4, tempo_exec_sec = 40;
 
 void * verifica_primo ( void * args  );
@@ -29,6 +31,7 @@ void * verifica_primo ( void * args ) {
         }
         if ( divisors == 0 ) {
             pthread_mutex_lock( &mutex_a );
+            primes[number_of_primes] = aux;
             number_of_primes ++;
             pthread_mutex_unlock( &mutex_a );
         }
