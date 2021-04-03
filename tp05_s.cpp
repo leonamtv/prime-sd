@@ -2,8 +2,10 @@
 #include <chrono>
 #include <cmath>
 
-unsigned long long int control = 0;
+unsigned long long int control = 1;
 unsigned long long number_of_primes = 0;
+int primes[50000000];
+
 int tempo_exec_sec = 40;
 
 void verifica_primo ();
@@ -17,8 +19,10 @@ void verifica_primo ( ) {
             ++divisors;
         div--;
     }
-    if ( divisors == 0 )
+    if ( divisors == 0 ) {
+        primes[number_of_primes] = aux;
         number_of_primes ++;
+    }
 }
 
 int main (int argc, char* argv[] ) {
