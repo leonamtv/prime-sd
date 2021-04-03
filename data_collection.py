@@ -11,14 +11,13 @@ threads = [ 2, 4, 8 ]
 
 print('Calculando tempo total...')
 
-tempo_total = tempo_paral = sum ( tempos )
-tempo_seq = 0
+tempo_seq = tempo_paral = sum ( tempos )
 
 tempo_paral *= len ( threads )
 tempo_total = tempo_paral + tempo_seq
 tempo_total *= tentativas
 
-print(f'Tempo total: {tempo_total}s')
+print(f'Tempo total: {tempo_total}s\n')
 
 now = datetime.now()
 
