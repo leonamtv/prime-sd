@@ -2,7 +2,7 @@
 #include <chrono>
 #include <cmath>
 
-unsigned long long int control = 0;
+unsigned long long int control = 1;
 unsigned long long number_of_primes = 0;
 int tempo_exec_sec = 40;
 
