@@ -11,13 +11,8 @@ threads = [ 2, 4, 8 ]
 
 print('Calculando tempo total...')
 
-tempo_total = 0
-tempo_paral = 0
+tempo_total = tempo_paral = sum ( tempos )
 tempo_seq = 0
-
-for tempo in tempos : 
-    tempo_paral += tempo
-    tempo_seq += tempo
 
 tempo_paral *= len ( threads )
 tempo_total = tempo_paral + tempo_seq
