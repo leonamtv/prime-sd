@@ -15,8 +15,9 @@ pthread_mutex_t mutex_b;
 
 void * verifica_primo ( void * args ) {
     while ( true ) {
-        int aux = control;
+        int aux = 0;
         pthread_mutex_lock( &mutex_b );
+        aux = control;
         control ++;
         pthread_mutex_unlock( &mutex_b );
         int div = (int) sqrt( aux );
