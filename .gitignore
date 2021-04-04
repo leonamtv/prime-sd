@@ -6,3 +6,4 @@ output_*
 .ipynb_checkpoints
 *.csv
 *.ipynb
+*.pdf
