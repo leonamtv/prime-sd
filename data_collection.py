@@ -5,7 +5,7 @@ import json
 import subprocess
 from datetime import datetime, timedelta
 
-tentativas = 10
+tentativas = 5
 tempos = [ 1, 2, 5, 10, 20, 30, 40, 50, 60, 80, 100, 120, 140 ]
 threads = [ 2, 4, 8 ]
 
